@@ -13,7 +13,6 @@ const newTeamMemberQuestions = [
     },
 
     {
-        // validate this so id is unique
         name: 'id',
         type: 'input',
         message: 'Enter employee ID:',
@@ -24,11 +23,6 @@ const newTeamMemberQuestions = [
         name: 'email',
         type: 'input',
         message: 'Enter email:',
-        // validate: (Function) Receive the user input and answers hash. 
-        // Should return true if the value is valid, and an error message (String) otherwise. 
-        // If false is returned, a default error message is provided.
-
-        // function that takes a str as input and makes sure it contains an @ and no spaces
     },
 
     {
@@ -47,10 +41,9 @@ const newTeamMemberQuestions = [
       },
  ];
 
-// PSEUDOCODE
-
-
 const teamArray = []; // stores team
+
+// initialize with manager
 addManager();
 
 // adds a manager to the team array
@@ -72,7 +65,6 @@ function addManager() {
 }
 
 // asks user if they would like to add another team member
-// or finish building the team
 function mainMenu() {
 
     inquirer
