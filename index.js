@@ -3,6 +3,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
 const inquirer = require('inquirer');
+const fetch = require("node-fetch");
 const fs = require('fs');
 /*
 --testing class imports--
@@ -31,6 +32,7 @@ inquirer
     console.log(error);
   });
 */
+const uniqueIDs = [];
 
 const newTeamMemberQuestions = [
     {
@@ -44,6 +46,10 @@ const newTeamMemberQuestions = [
         name: 'id',
         type: 'input',
         message: 'Enter employee ID:',
+        // validate: function (value) {
+        //     if ((/.+/).test(value)) { return true; }
+        //     return 'name is required';
+        // }
         
     },
 
@@ -51,17 +57,15 @@ const newTeamMemberQuestions = [
         name: 'email',
         type: 'input',
         message: 'Enter email:',
-        // validate: (Function) Receive the user input and answers hash. 
-        // Should return true if the value is valid, and an error message (String) otherwise. 
-        // If false is returned, a default error message is provided.
-
-        // function that takes a str as input and makes sure it contains an @ and no spaces
-    },
-
-    {
-        name: 'misc',
-        type: 'input',
-        message: 'modify this question based on employee type selected:',
+        validate: function (userInput) {
+            const hasNoSpaces = userInput.indexOf(" ") === -1;
+            const hasAt = userInput.includes("@");
+            const hasDot = userInput.includes(".");
+            if (hasAt && hasDot && hasNoSpaces) {
+                 return true; 
+                }
+            return 'Please enter a valid e-mail address';
+        }
     },
  ];
 
@@ -73,9 +77,6 @@ const newTeamMemberQuestions = [
         choices: ['add an engineer', 'add an intern', 'finish building my team',],
       },
  ];
-
-// PSEUDOCODE
-
 
 const teamArray = []; // stores team
 addManager();
@@ -90,6 +91,7 @@ function addManager() {
     .prompt(newTeamMemberQuestions)
     .then((newEmployee) => {
 
+        uniqueIDs.push(newEmployee.id);
         const manager = new Manager(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
         teamArray.push(manager);
         mainMenu();
@@ -113,7 +115,8 @@ function mainMenu() {
             addIntern();
 
         } else {
-            console.log("not yet implemented, terminating...");
+            console.log("writeHTML not yet implemented");
+            console.log("here's the team you created:");
             console.log(teamArray);
             // writeHTML();
         }
@@ -126,15 +129,32 @@ function addEngineer() {
     newTeamMemberQuestions[0].message = "what is the engineer’s name?"
     newTeamMemberQuestions[3].message = "what is the engineer’s github handle?"
 
-    inquirer
-    .prompt(newTeamMemberQuestions)
-    .then((newEmployee) => {
+    const engineerQuestion = {
+        name: 'misc',
+        type: 'input',
+        message: 'modify this question based on employee type selected:',
+        validate: (userInput) => {
+            const hasNoSpaces = userInput.indexOf(" ") === -1;
+            const hasAt = userInput.includes("@");
+            const hasDot = userInput.includes(".");
+            if (hasAt && hasDot && hasNoSpaces) {
+                 return true; 
+                }
+            return 'Please enter a valid e-mail address';
+        }
+    }
+    newTeamMemberQuestions.push(engineerQuestion);
 
-        const newEngineer = new Engineer(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
-        teamArray.push(newEngineer);
-        mainMenu();
-        
-    });
+    inquirer
+        .prompt(newTeamMemberQuestions)
+        .then((newEmployee) => {
+            uniqueIDs.push(newEmployee.id);
+            const newEngineer = new Engineer(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+            teamArray.push(newEngineer);
+            newTeamMemberQuestions.pop(engineerQuestion);
+            console.log(newTeamMemberQuestions);
+            mainMenu();
+        });
 }
 
 // adds an intern to the team array
@@ -143,15 +163,14 @@ function addIntern() {
   newTeamMemberQuestions[0].message = "what is the intern’s name?"
   newTeamMemberQuestions[3].message = "what is the intern’s school?"
 
-  inquirer
-  .prompt(newTeamMemberQuestions)
-  .then((newEmployee) => {
-
-      const newIntern = new Intern(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
-      teamArray.push(newIntern);
-      mainMenu();
-      
-  });
+    inquirer
+        .prompt(newTeamMemberQuestions)
+        .then((newEmployee) => {
+            uniqueIDs.push(newEmployee.id);
+            const newIntern = new Intern(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+            teamArray.push(newIntern);
+            mainMenu();
+        });
 }
 
 /*
