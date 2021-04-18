@@ -79,7 +79,7 @@ const newTeamMemberQuestions = [
 const teamArray = []; // stores team
 addManager();
 
-
+// adds a manager to the team
 function addManager() {
 
     newTeamMemberQuestions[0].message = "what is the team manager’s name?"
@@ -91,72 +91,76 @@ function addManager() {
 
         const manager = new Manager(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
         teamArray.push(manager);
-        
-        // console.log("TEAM ARRAY");
-        // console.log(teamArray);
-
-        // mainMenu();
+        mainMenu();
         
     });
 
 }
 
-
-/*
+// asks user if they would like to add another team member
+// or finish building the team
 function mainMenu() {
 
-  inquire (mainMenuChoices)
-
-  then
-    if (add an engineer) {
-        addEngineer()
-    } else if (add an intern) {
-        addIntern()
-    } else {
-        writeHTML()
-    }
-}
-*/
-
-/*
-function addEngineer() {
-
-  newTeamMemberQuestions[0].message = "what is the engineer’s name?"
-  newTeamMemberQuestions[3].message = "what is the engineer’s office number?"
-
     inquirer
-    .prompt(newTeamMemberQuestions)
-    .then((answers) => {
+    .prompt(mainMenuChoices)
+    .then((data) => {
 
-        console.log(answers);
+        // console.log(data.choice);
 
-        // make new Engineer
-        // push to teamArray
-        // mainMenu();
+        if (data.choice === 'add an engineer') {
+            addEngineer();
 
+        } else if (data.choice === 'add an intern') {
+            addIntern();
+
+        } else {
+            console.log("not yet implemented, terminating...");
+            // writeHTML();
+        }
     });
 }
-*/
 
-/*
+function addEngineer() {
+    console.log("inside add ENGINEER function!");
+
+//   newTeamMemberQuestions[0].message = "what is the engineer’s name?"
+//   newTeamMemberQuestions[3].message = "what is the engineer’s office number?"
+
+//     inquirer
+//     .prompt(newTeamMemberQuestions)
+//     .then((answers) => {
+
+//         console.log(answers);
+
+//         // make new Engineer
+//         // push to teamArray
+//         // mainMenu();
+
+//     });
+
+    mainMenu();
+
+}
+
 function addIntern() {
+    console.log("inside add INTERN function!");
 
-  newTeamMemberQuestions[0].message = "what is the intern’s name?"
-  newTeamMemberQuestions[3].message = "what is the intern’s school?"
+//   newTeamMemberQuestions[0].message = "what is the intern’s name?"
+//   newTeamMemberQuestions[3].message = "what is the intern’s school?"
 
-    inquirer
-    .prompt(newTeamMemberQuestions)
-    .then((answers) => {
+//     inquirer
+//     .prompt(newTeamMemberQuestions)
+//     .then((answers) => {
 
-        console.log(answers);
+//         console.log(answers);
 
         // make new Intern
         // push to teamArray
         // mainMenu();
 
-    });
+    // });
+    mainMenu();
 }
-*/
 
 /*
 function writeHTML() {
