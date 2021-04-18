@@ -75,29 +75,35 @@ const newTeamMemberQuestions = [
 
 // PSEUDOCODE
 
-/*
+
 const teamArray = []; // stores team
-addManager()
-*/
+addManager();
 
-/*
-addManager() {
 
-  newTeamMemberQuestions[0].message = "what is the team manager’s name?"
-  newTeamMemberQuestions[3].message = "what is the team manager’s office number?"
+function addManager() {
 
-  inquire (newTeamMemberQuestions)
-      validate each
+    newTeamMemberQuestions[0].message = "what is the team manager’s name?"
+    newTeamMemberQuestions[3].message = "what is the team manager’s office number?"
 
-  then (data)
-    make new Manager(use data properties)
-    push to teamArray
-    mainMenu();
+    inquirer
+    .prompt(newTeamMemberQuestions)
+    .then((newEmployee) => {
+
+        const manager = new Manager(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+        teamArray.push(manager);
+        
+        // console.log("TEAM ARRAY");
+        // console.log(teamArray);
+
+        // mainMenu();
+        
+    });
+
 }
-*/
+
 
 /*
-mainMenu() {
+function mainMenu() {
 
   inquire (mainMenuChoices)
 
@@ -113,39 +119,47 @@ mainMenu() {
 */
 
 /*
-addEngineer() {
+function addEngineer() {
 
   newTeamMemberQuestions[0].message = "what is the engineer’s name?"
   newTeamMemberQuestions[3].message = "what is the engineer’s office number?"
 
-  inquire (newTeamMemberQuestions)
-      validate each
+    inquirer
+    .prompt(newTeamMemberQuestions)
+    .then((answers) => {
 
-  then
-    make new Engineer
-    push to teamArray
-    mainMenu();
+        console.log(answers);
+
+        // make new Engineer
+        // push to teamArray
+        // mainMenu();
+
+    });
 }
 */
 
 /*
-addIntern() {
+function addIntern() {
 
   newTeamMemberQuestions[0].message = "what is the intern’s name?"
   newTeamMemberQuestions[3].message = "what is the intern’s school?"
 
-  inquire (newTeamMemberQuestions)
-      validate each
+    inquirer
+    .prompt(newTeamMemberQuestions)
+    .then((answers) => {
 
-  then
-    make new Intern
-    push to teamArray
-    mainMenu();
+        console.log(answers);
+
+        // make new Intern
+        // push to teamArray
+        // mainMenu();
+
+    });
 }
 */
 
 /*
-writeHTML() {
+function writeHTML() {
 
 const teamTemplate = "";
 for each team member 
