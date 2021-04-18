@@ -115,6 +115,7 @@ function mainMenu() {
 
         } else {
             console.log("not yet implemented, terminating...");
+            console.log(teamArray);
             // writeHTML();
         }
     });
@@ -123,22 +124,18 @@ function mainMenu() {
 function addEngineer() {
     console.log("inside add ENGINEER function!");
 
-//   newTeamMemberQuestions[0].message = "what is the engineer’s name?"
-//   newTeamMemberQuestions[3].message = "what is the engineer’s office number?"
+    newTeamMemberQuestions[0].message = "what is the engineer’s name?"
+    newTeamMemberQuestions[3].message = "what is the engineer’s office number?"
 
-//     inquirer
-//     .prompt(newTeamMemberQuestions)
-//     .then((answers) => {
+    inquirer
+    .prompt(newTeamMemberQuestions)
+    .then((newEmployee) => {
 
-//         console.log(answers);
-
-//         // make new Engineer
-//         // push to teamArray
-//         // mainMenu();
-
-//     });
-
-    mainMenu();
+        const newEngineer = new Engineer(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+        teamArray.push(newEngineer);
+        mainMenu();
+        
+    });
 
 }
 
