@@ -85,10 +85,8 @@ function mainMenu() {
         } else if (data.choice === 'add an intern') {
             addIntern();
 
-        } else {
-            console.log("not yet implemented, terminating...");
-            console.log(teamArray);
-            // writeHTML();
+        } else { // data.choice === 'finish building my team'
+            writeHTML();
         }
     });
 }
@@ -127,27 +125,13 @@ function addIntern() {
   });
 }
 
-/*
+// writes HTML
 function writeHTML() {
 
-const teamTemplate = "";
-for each team member 
-    enter the following into a string template literal:
-        name
-        role
-          icon corresponding to role
-        id
-        email
-        office#/githubLink/school
+    const teamTemplate = "does this thing work?";
 
-    teamTemplate += stringTemplateLiteral;
-
-place teamTemplate string into larger template
-
-note: data must be a string
-fs.writeFile('teamprofile.html', data, (err) =>
-  err ? console.error(err) : console.log('HTML successfully generated!')
-);
+    fs.writeFile('./dist/team-profile.html', teamTemplate, (err) =>
+    err ? console.error(err) : console.log('HTML successfully generated!')
+    );
 
 }
-*/
