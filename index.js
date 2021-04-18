@@ -40,9 +40,11 @@ const newTeamMemberQuestions = [
     },
 
     {
+        // validate this so id is unique
         name: 'id',
         type: 'input',
         message: 'Enter employee ID:',
+        
     },
 
     {
@@ -60,7 +62,6 @@ const newTeamMemberQuestions = [
         name: 'misc',
         type: 'input',
         message: 'modify this question based on employee type selected:',
-        // validate: 
     },
  ];
 
@@ -79,7 +80,7 @@ const newTeamMemberQuestions = [
 const teamArray = []; // stores team
 addManager();
 
-// adds a manager to the team
+// adds a manager to the team array
 function addManager() {
 
     newTeamMemberQuestions[0].message = "what is the team manager’s name?"
@@ -105,8 +106,6 @@ function mainMenu() {
     .prompt(mainMenuChoices)
     .then((data) => {
 
-        // console.log(data.choice);
-
         if (data.choice === 'add an engineer') {
             addEngineer();
 
@@ -121,11 +120,11 @@ function mainMenu() {
     });
 }
 
+// adds an engineer to the team array
 function addEngineer() {
-    console.log("inside add ENGINEER function!");
 
     newTeamMemberQuestions[0].message = "what is the engineer’s name?"
-    newTeamMemberQuestions[3].message = "what is the engineer’s office number?"
+    newTeamMemberQuestions[3].message = "what is the engineer’s github handle?"
 
     inquirer
     .prompt(newTeamMemberQuestions)
@@ -136,27 +135,23 @@ function addEngineer() {
         mainMenu();
         
     });
-
 }
 
+// adds an intern to the team array
 function addIntern() {
-    console.log("inside add INTERN function!");
 
-//   newTeamMemberQuestions[0].message = "what is the intern’s name?"
-//   newTeamMemberQuestions[3].message = "what is the intern’s school?"
+  newTeamMemberQuestions[0].message = "what is the intern’s name?"
+  newTeamMemberQuestions[3].message = "what is the intern’s school?"
 
-//     inquirer
-//     .prompt(newTeamMemberQuestions)
-//     .then((answers) => {
+  inquirer
+  .prompt(newTeamMemberQuestions)
+  .then((newEmployee) => {
 
-//         console.log(answers);
-
-        // make new Intern
-        // push to teamArray
-        // mainMenu();
-
-    // });
-    mainMenu();
+      const newIntern = new Intern(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+      teamArray.push(newIntern);
+      mainMenu();
+      
+  });
 }
 
 /*
