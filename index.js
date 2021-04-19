@@ -57,6 +57,7 @@ function addManager() {
     .then((newEmployee) => {
 
         const manager = new Manager(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+
         teamArray.push(manager);
         mainMenu();
         
@@ -120,10 +121,111 @@ function addIntern() {
 // writes HTML
 function writeHTML() {
 
-    const teamTemplate = "does this thing work?";
+    const teamTemplate = getHtmlTemplate ();
 
     fs.writeFile('./dist/team-profile.html', teamTemplate, (err) =>
     err ? console.error(err) : console.log('HTML successfully generated!')
     );
 
 }
+
+function getHtmlTemplate() {
+
+    return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Team Profile</title>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>
+            My Team
+        </h1>
+    </header>
+
+    <main>
+
+        <!-- team section -->
+        <section class="flex-container">
+            ${getCards()}
+        </section> <!-- end manager section -->
+
+    </main>
+
+</body>
+
+</html> 
+`;
+}
+
+
+function getCards() {
+
+    let htmlCards = "";
+
+    for (let i = 0; i < teamArray.length; i++) {
+
+        const role = teamArray[i].getRole();
+        let roleIcon;
+        let uniqueDataName;
+        let uniqueData;
+
+        if (role === "Manager") {
+
+            roleIcon = "<i class='fa fa-coffee fa-3x'>";
+            uniqueDataName = "office #:";
+            uniqueData = teamArray[i].getOfficeNumber();
+
+        } else if (role === "Engineer") {
+
+            roleIcon = "<i class='fa fa-cogs fa-3x'>";
+            uniqueDataName = "github:";
+            uniqueData = teamArray[i].getGithub();
+
+        } else { // role === "Intern"
+
+            roleIcon = "<i class='fa fa-graduation-cap fa-3x'>";
+            uniqueDataName = "school:";
+            uniqueData = teamArray[i].getSchool();
+        }
+
+        htmlCards += `
+        <section class="card">        
+            <h2><b>${teamArray[i].name}</b></h2>
+            <table class="info-table">
+                <tr>
+                    <th class="icon-box">${roleIcon}</i></th>
+                    <td><b>${role}</b></td>
+                </tr>
+                <tr>
+                    <th>id:</th>
+                    <td>${teamArray[i].id}</td>
+                </tr>
+                <tr>
+                    <th>email:</th>
+                    <td>${teamArray[i].email}</td>
+                </tr>
+                <tr>
+                    <th>${uniqueDataName}</th>
+                    <td>${uniqueData}</td>
+                </tr>
+            </table>
+        </section><!-- end card -->
+        `;
+    }
+
+    return htmlCards;
+}
+
