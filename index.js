@@ -229,41 +229,18 @@ function getCards() {
     return htmlCards;
 }
 
+// returns an array of employees of the given role
+// data: a string representing a job role
+//   ex: getRoleArray("Engineer") returns [{engineer1}, {engineer2}, ...]
+function getRoleArray (role) {
 
-// const newManager = new Manager("Bob", 1, "bob@bob.cob", 101);
-// const newEngineer = new Engineer("Rob", 2, "rob@bob.cob", "yolowololo");
-// const newIntern = new Intern("Robbob", 3, "robbobb@bob.cob", "UW");
-// teamArray.push(newManager);
-// teamArray.push(newEngineer);
-// teamArray.push(newIntern);
+    return teamArray.filter(function(employee) {
 
-// const managersOnly = teamArray.filter(function(data) {
-//     if (data.getRole() === "Manager") {
-//         return true;
-//     }
-//     return false;
-//   });
+        if (employee.getRole() === role) {
+            return true;
+        }
+        return false;
+        });
+}
 
-//   const engineersOnly = teamArray.filter(function(data) {
-//     if (data.getRole() === "Engineer") {
-//         return true;
-//     }
-//     return false;
-//   });
-
-//   const internsOnly = teamArray.filter(function(data) {
-//     if (data.getRole() === "Intern") {
-//         return true;
-//     }
-//     return false;
-//   });
-
-//   console.log(managersOnly);
-//   console.log("==================");
-
-//   console.log(engineersOnly);
-//   console.log("==================");
-
-//   console.log(internsOnly);
-//   console.log("==================");
 
