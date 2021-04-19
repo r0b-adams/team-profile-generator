@@ -44,7 +44,7 @@ const newTeamMemberQuestions = [
 const teamArray = []; // stores team
 
 // initialize with manager
-addManager();
+// addManager();
 
 // adds a manager to the team array
 function addManager() {
@@ -228,4 +228,42 @@ function getCards() {
 
     return htmlCards;
 }
+
+
+// const newManager = new Manager("Bob", 1, "bob@bob.cob", 101);
+// const newEngineer = new Engineer("Rob", 2, "rob@bob.cob", "yolowololo");
+// const newIntern = new Intern("Robbob", 3, "robbobb@bob.cob", "UW");
+// teamArray.push(newManager);
+// teamArray.push(newEngineer);
+// teamArray.push(newIntern);
+
+// const managersOnly = teamArray.filter(function(data) {
+//     if (data.getRole() === "Manager") {
+//         return true;
+//     }
+//     return false;
+//   });
+
+//   const engineersOnly = teamArray.filter(function(data) {
+//     if (data.getRole() === "Engineer") {
+//         return true;
+//     }
+//     return false;
+//   });
+
+//   const internsOnly = teamArray.filter(function(data) {
+//     if (data.getRole() === "Intern") {
+//         return true;
+//     }
+//     return false;
+//   });
+
+//   console.log(managersOnly);
+//   console.log("==================");
+
+//   console.log(engineersOnly);
+//   console.log("==================");
+
+//   console.log(internsOnly);
+//   console.log("==================");
 
