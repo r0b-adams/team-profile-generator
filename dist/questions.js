@@ -34,12 +34,6 @@ const newEmployee = [
       },
  ];
 
-
-
-
-
-
-
 module.exports = {
     newEmployee,
     mainMenu,

@@ -56,9 +56,9 @@ function getSections(rolesObj) {
 
             // get cards and append to sections
             roleSection += `
-            <section class="flex-container">
-                ${getTeamCards(currRoleArray)}
-            </section> <!-- end section -->
+        <section class="flex-container">
+            ${getTeamCards(currRoleArray)}
+        </section> <!-- end section -->
             `;
         }
     }
@@ -88,27 +88,27 @@ function getCard(employee) {
     const roleInfo = getRoleInfo(employee);
 
     return `
-<section class="card">        
-    <h2><b>${employee.name}</b></h2>
-    <table class="info-table">
-        <tr>
-            <th class="icon-box">${roleInfo.icon}</th>
-            <td><b>${roleName}</b></td>
-        </tr>
-        <tr>
-            <th>id:</th>
-            <td>${employee.id}</td>
-        </tr>
-        <tr>
-            <th>email:</th>
-            <td><a href="mailto:${employee.email}">${employee.email}</a></td>
-        </tr>
-        <tr>
-            <th>${roleInfo.label}</th>
-            <td>${roleInfo.content}</td>
-        </tr>
-    </table>
-</section><!-- end card -->
+                <section class="card">        
+                    <h2><b>${employee.name}</b></h2>
+                    <table class="info-table">
+                        <tr>
+                            <th class="icon-box">${roleInfo.icon}</th>
+                            <td><b>${roleName}</b></td>
+                        </tr>
+                        <tr>
+                            <th>id:</th>
+                            <td>${employee.id}</td>
+                        </tr>
+                        <tr>
+                            <th>email:</th>
+                            <td><a href="mailto:${employee.email}">${employee.email}</a></td>
+                        </tr>
+                        <tr>
+                            <th>${roleInfo.label}</th>
+                            <td>${roleInfo.content}</td>
+                        </tr>
+                    </table>
+                </section><!-- end card -->
 `;
 }
 
