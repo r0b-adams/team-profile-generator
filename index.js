@@ -41,29 +41,20 @@ const newTeamMemberQuestions = [
       },
  ];
 
-const teamArray = []; // stores team
+ // TESTING
+const teamArray = [
+    new Manager("MANAGER", "newEmployee.id", "newEmployee.email", "OFFICE NUMBER"),
+    new Engineer('ENGINEER 1', 'newEmployee.id', 'newEmployee.email', 'GITHUB'),
+    new Intern('INTERN 1', 'newEmployee.id,', 'newEmployee.email', 'SCHOOL'),
+    new Engineer('ENGINEER 2', 'newEmployee.id', 'newEmployee.email', 'GITHUB'),
+    new Intern('INTERN 2', 'newEmployee.id,', 'newEmployee.email', 'SCHOOL'),
+    new Engineer('ENGINEER 3', 'newEmployee.id', 'newEmployee.email', 'GITHUB'),
+    new Intern('INTERN 3', 'newEmployee.id,', 'newEmployee.email', 'SCHOOL'),
+]; // stores team
 
 // initialize with manager
 // addManager();
-
-// adds a manager to the team array
-function addManager() {
-
-    newTeamMemberQuestions[0].message = "what is the team manager’s name?"
-    newTeamMemberQuestions[3].message = "what is the team manager’s office number?"
-
-    inquirer
-    .prompt(newTeamMemberQuestions)
-    .then((newEmployee) => {
-
-        const manager = new Manager(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
-
-        teamArray.push(manager);
-        mainMenu();
-        
-    });
-
-}
+console.log(teamArray);
 
 // asks user if they would like to add another team member
 function mainMenu() {
@@ -82,6 +73,25 @@ function mainMenu() {
             writeHTML();
         }
     });
+}
+
+// adds a manager to the team array
+function addManager() {
+
+    newTeamMemberQuestions[0].message = "what is the team manager’s name?"
+    newTeamMemberQuestions[3].message = "what is the team manager’s office number?"
+
+    inquirer
+    .prompt(newTeamMemberQuestions)
+    .then((newEmployee) => {
+
+        const manager = new Manager(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+
+        teamArray.push(manager);
+        mainMenu();
+        
+    });
+
 }
 
 // adds an engineer to the team array
@@ -129,6 +139,7 @@ function writeHTML() {
 
 }
 
+//
 function getHtmlTemplate() {
 
     return `
@@ -170,9 +181,9 @@ function getHtmlTemplate() {
 `;
 }
 
-
+//
 function getCards() {
-
+    console.log(teamArray);
     let htmlCards = "";
 
     for (let i = 0; i < teamArray.length; i++) {
@@ -230,7 +241,7 @@ function getCards() {
 }
 
 // returns an array of employees of the given role
-// data: a string representing a job role
+// role: a string representing a job role
 //   ex: getRoleArray("Engineer") returns [{engineer1}, {engineer2}, ...]
 function getRoleArray (role) {
 
