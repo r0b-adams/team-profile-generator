@@ -3,46 +3,19 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const fs = require('fs');
 
-const htmlGenerator = require('./generator');
+// assist with user input
 const inquirer = require('inquirer');
 
-const newTeamMemberQuestions = [
-    {
-        name: 'name',
-        type: 'input',
-        message: 'modify this question based on employee type selected:',
-    },
+// helper code
+const htmlGenerator = require('./dist/generator');
 
-    {
-        name: 'id',
-        type: 'input',
-        message: 'Enter employee ID:',
-        
-    },
+// imported questions for inquirer prompt
+const questions = require('./dist/questions');
+const mainMenuQs = questions.mainMenu;
+const newEmpQs = questions.newEmployee;
 
-    {
-        name: 'email',
-        type: 'input',
-        message: 'Enter email:',
-    },
-
-    {
-        name: 'misc',
-        type: 'input',
-        message: 'modify this question based on employee type selected:',
-    },
- ];
-
- const mainMenuChoices = [
-    {
-        type: 'list',
-        message: 'add a team member?',
-        name: 'choice',
-        choices: ['add an engineer', 'add an intern', 'finish building my team',],
-      },
- ];
-
-const teamArray = []; // stores team
+// stores team members
+const teamArray = []; 
 
 // initialize with manager
 addManager();
@@ -51,7 +24,7 @@ addManager();
 function mainMenu() {
 
     inquirer
-    .prompt(mainMenuChoices)
+    .prompt(mainMenuQs)
     .then((data) => {
 
         if (data.choice === 'add an engineer') {
@@ -69,15 +42,14 @@ function mainMenu() {
 // adds a manager to the team array
 function addManager() {
 
-    newTeamMemberQuestions[0].message = "what is the team manager’s name?"
-    newTeamMemberQuestions[3].message = "what is the team manager’s office number?"
+    newEmpQs[0].message = "what is the team manager’s name?"
+    newEmpQs[3].message = "what is the team manager’s office number?"
 
     inquirer
-    .prompt(newTeamMemberQuestions)
+    .prompt(newEmpQs)
     .then((newEmployee) => {
 
         const manager = new Manager(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
-
         teamArray.push(manager);
         mainMenu();
         
@@ -88,11 +60,11 @@ function addManager() {
 // adds an engineer to the team array
 function addEngineer() {
 
-    newTeamMemberQuestions[0].message = "what is the engineer’s name?"
-    newTeamMemberQuestions[3].message = "what is the engineer’s github handle?"
+    newEmpQs[0].message = "what is the engineer’s name?"
+    newEmpQs[3].message = "what is the engineer’s github handle?"
 
     inquirer
-    .prompt(newTeamMemberQuestions)
+    .prompt(newEmpQs)
     .then((newEmployee) => {
 
         const newEngineer = new Engineer(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
@@ -105,34 +77,32 @@ function addEngineer() {
 // adds an intern to the team array
 function addIntern() {
 
-  newTeamMemberQuestions[0].message = "what is the intern’s name?"
-  newTeamMemberQuestions[3].message = "what is the intern’s school?"
+    newEmpQs[0].message = "what is the intern’s name?"
+    newEmpQs[3].message = "what is the intern’s school?"
 
-  inquirer
-  .prompt(newTeamMemberQuestions)
-  .then((newEmployee) => {
+    inquirer
+    .prompt(newEmpQs)
+    .then((newEmployee) => {
 
-      const newIntern = new Intern(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
-      teamArray.push(newIntern);
-      mainMenu();
-      
+        const newIntern = new Intern(newEmployee.name, newEmployee.id, newEmployee.email, newEmployee.misc);
+        teamArray.push(newIntern);
+        mainMenu();
+
   });
 }
 
-// writes HTML
+// writes HTML template to file
 function writeHTML() {
 
     const sortedRoles = getSortedRoles();
     const teamTemplate = htmlGenerator.getTeamPage(sortedRoles);
 
-    fs.writeFile('./dist/team-profile.html', teamTemplate, (err) =>
+    fs.writeFile('./dist/team.html', teamTemplate, (err) =>
     err ? console.error(err) : console.log('HTML successfully generated!')
     );
-
 }
 
-// iterates over teamArray and returns
-// an object with arrays sorted by role
+// iterates over teamArray and returns an object with arrays sorted by role
 function getSortedRoles() {
     const sortedArrays = {
         managers: [],
