@@ -54,7 +54,7 @@ const teamArray = [
 
 // initialize with manager
 // addManager();
-console.log(teamArray);
+// console.log(teamArray);
 
 // asks user if they would like to add another team member
 function mainMenu() {
@@ -181,9 +181,35 @@ function getHtmlTemplate() {
 `;
 }
 
+// iterates over teamArray function and returns
+// an object with arrays sorted by role
+function getSortedRoles() {
+    const sortedArrays = {
+        managers: [],
+        engineers: [],
+        interns: [],
+    };
+
+    for (let i = 0; i < teamArray.length; i++)  {
+
+        const currEmployee = teamArray[i]
+
+        if (teamArray[i].getRole() === "Manager") {
+            sortedArrays.managers.push(currEmployee);
+
+        } else if (teamArray[i].getRole() === "Engineer") {
+            sortedArrays.engineers.push(currEmployee);
+
+        } else { // (teamArray[i].getRole() === "Intern")
+            sortedArrays.interns.push(currEmployee);
+        } 
+    }
+    
+    return sortedArrays;
+}
+
 //
 function getCards() {
-    console.log(teamArray);
     let htmlCards = "";
 
     for (let i = 0; i < teamArray.length; i++) {
@@ -240,18 +266,5 @@ function getCards() {
     return htmlCards;
 }
 
-// returns an array of employees of the given role
-// role: a string representing a job role
-//   ex: getRoleArray("Engineer") returns [{engineer1}, {engineer2}, ...]
-function getRoleArray (role) {
-
-    return teamArray.filter(function(employee) {
-
-        if (employee.getRole() === role) {
-            return true;
-        }
-        return false;
-        });
-}
 
 
