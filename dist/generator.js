@@ -101,7 +101,7 @@ function getCard(employee) {
         </tr>
         <tr>
             <th>email:</th>
-            <td>${employee.email}</td>
+            <td><a href="mailto:${employee.email}">${employee.email}</a></td>
         </tr>
         <tr>
             <th>${roleInfo.label}</th>
@@ -131,7 +131,7 @@ function getRoleInfo(employee) {
         return {
             icon: "<i class='fa fa-cogs fa-3x'>", 
             label: "github:", 
-            content: `<a href="https://github.com/${githubName}">${githubName}</a>`,
+            content: `<a href="https://github.com/${githubName}" target="_blank">${githubName}</a>`,
         }
 
     } else { // roleName === "Intern"

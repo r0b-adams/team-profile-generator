@@ -22,7 +22,7 @@ a {
 
 .info-table th {
     text-align: right;
-    width: 33.3%;
+    width: 40%;
 }
 
 .info-table td {
@@ -40,14 +40,14 @@ h2 {
     box-shadow: 0 5px 10px 0 rgb(0 0 0 / 30%);
     border-radius: 5px; /* 5px rounded corners */
     width: 25%;
-    margin: 0px 10px;
+    margin: 10px 10px;
     background-color: whitesmoke;
 }
 
 .flex-container {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    justify-content: center;
 }
 
   
