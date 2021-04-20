@@ -42,23 +42,10 @@ const newTeamMemberQuestions = [
       },
  ];
 
- // TESTING
-const teamArray = [
-    new Manager("MANAGER", "newEmployee.id", "newEmployee.email", "OFFICE NUMBER"),
-    new Engineer('ENGINEER 1', 'newEmployee.id', 'newEmployee.email', 'GITHUB'),
-    new Intern('INTERN 1', 'newEmployee.id,', 'newEmployee.email', 'SCHOOL'),
-    new Engineer('ENGINEER 2', 'newEmployee.id', 'newEmployee.email', 'GITHUB'),
-    new Intern('INTERN 2', 'newEmployee.id,', 'newEmployee.email', 'SCHOOL'),
-    new Engineer('ENGINEER 3', 'newEmployee.id', 'newEmployee.email', 'GITHUB'),
-    new Intern('INTERN 3', 'newEmployee.id,', 'newEmployee.email', 'SCHOOL'),
-]; // stores team
+const teamArray = []; // stores team
 
 // initialize with manager
-// addManager();
-
-// console.log(teamArray);
-console.log(htmlGenerator.getTeamPage(getSortedRoles()));
-
+addManager();
 
 // asks user if they would like to add another team member
 function mainMenu() {
@@ -144,7 +131,7 @@ function writeHTML() {
 
 }
 
-// iterates over teamArray function and returns
+// iterates over teamArray and returns
 // an object with arrays sorted by role
 function getSortedRoles() {
     const sortedArrays = {
@@ -153,20 +140,34 @@ function getSortedRoles() {
         interns: [],
     };
 
-    for (let i = 0; i < teamArray.length; i++)  {
+    for (const employee of teamArray) {
+        role = employee.getRole();
+        switch (role) {
+            case "Manager":
+                sortedArrays.managers.push(employee);
+              break;
+            case "Engineer":
+                sortedArrays.engineers.push(employee);
+              break;
+            default:
+              sortedArrays.interns.push(employee);
+          }
+      }
 
-        const currEmployee = teamArray[i]
+    // for (let i = 0; i < teamArray.length; i++)  {
 
-        if (teamArray[i].getRole() === "Manager") {
-            sortedArrays.managers.push(currEmployee);
+    //     const currEmployee = teamArray[i]
 
-        } else if (teamArray[i].getRole() === "Engineer") {
-            sortedArrays.engineers.push(currEmployee);
+    //     if (teamArray[i].getRole() === "Manager") {
+    //         sortedArrays.managers.push(currEmployee);
 
-        } else { // (teamArray[i].getRole() === "Intern")
-            sortedArrays.interns.push(currEmployee);
-        } 
-    }
+    //     } else if (teamArray[i].getRole() === "Engineer") {
+    //         sortedArrays.engineers.push(currEmployee);
+
+    //     } else { // (teamArray[i].getRole() === "Intern")
+    //         sortedArrays.interns.push(currEmployee);
+    //     } 
+    // }
 
     return sortedArrays;
 }

@@ -1,34 +1,3 @@
-
-
-// This is what is passed:
-
-// {
-//     managers: [
-//       Manager {
-//         name: 'MANAGER',
-//         id: 'newEmployee.id',
-//         email: 'newEmployee.email',
-//         officeNumber: 'OFFICE NUMBER'
-//       }
-//     ],
-//     engineers: [
-//       Engineer {
-//         name: 'ENGINEER 1',
-//         id: 'newEmployee.id',
-//         email: 'newEmployee.email',
-//         github: 'GITHUB'
-//       },
-//     ],
-//     interns: [
-//       Intern {
-//         name: 'INTERN 1',
-//         id: 'newEmployee.id,',
-//         email: 'newEmployee.email',
-//         school: 'SCHOOL'
-//       },
-//     ]
-//   }
-
 // accepts an object with an array associated to each key
 // returns html of team page
 function getTeamPage(rolesObj) { 
@@ -36,37 +5,37 @@ function getTeamPage(rolesObj) {
     const teamSections = getSections(rolesObj);
 
     let template = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-        <link rel="stylesheet" href="./reset.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./style.css">
-    
-        <title>Team Profile</title>
-    
-    </head>
-    
-    <body>
-    
-        <header>
-            <h1>
-                My Team
-            </h1>
-        </header>
-    
-        <main>
-            ${teamSections}
-        </main>
-    
-    </body>
-    
-    </html>
-    `;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Team Profile</title>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>
+            My Team
+        </h1>
+    </header>
+
+    <main>
+        ${teamSections}
+    </main>
+
+</body>
+
+</html>
+`;
     return template;
 }
 
@@ -74,7 +43,7 @@ function getTeamPage(rolesObj) {
 // returns html sections of employee cards
 function getSections(rolesObj) {
 
-    let allSections = "";
+    let roleSection = "";
 
     // for each role, make a section
     for (const role in rolesObj) {
@@ -86,14 +55,14 @@ function getSections(rolesObj) {
         if (rolesObj[role].length > 0) {
 
             // get cards and append to sections
-            allSections += `
+            roleSection += `
             <section class="flex-container">
                 ${getTeamCards(currRoleArray)}
-            </section> 
+            </section> <!-- end section -->
             `;
         }
     }
-    return allSections;
+    return roleSection;
 }
 
 // accepts an array of a particular role
@@ -119,28 +88,28 @@ function getCard(employee) {
     const roleInfo = getRoleInfo(employee);
 
     return `
-    <section class="card">        
-        <h2><b>${employee.name}</b></h2>
-        <table class="info-table">
-            <tr>
-                <th class="icon-box">${roleInfo.icon}</th>
-                <td><b>${roleName}</b></td>
-            </tr>
-            <tr>
-                <th>id:</th>
-                <td>${employee.id}</td>
-            </tr>
-            <tr>
-                <th>email:</th>
-                <td>${employee.email}</td>
-            </tr>
-            <tr>
-                <th>${roleInfo.label}</th>
-                <td>${roleInfo.content}</td>
-            </tr>
-        </table>
-    </section><!-- end card -->
-    `;
+<section class="card">        
+    <h2><b>${employee.name}</b></h2>
+    <table class="info-table">
+        <tr>
+            <th class="icon-box">${roleInfo.icon}</th>
+            <td><b>${roleName}</b></td>
+        </tr>
+        <tr>
+            <th>id:</th>
+            <td>${employee.id}</td>
+        </tr>
+        <tr>
+            <th>email:</th>
+            <td>${employee.email}</td>
+        </tr>
+        <tr>
+            <th>${roleInfo.label}</th>
+            <td>${roleInfo.content}</td>
+        </tr>
+    </table>
+</section><!-- end card -->
+`;
 }
 
 // accepts an employee object
