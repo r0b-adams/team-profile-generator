@@ -4,7 +4,7 @@
 
 ## Description
 
-This application creates a webpage for a software engineering team. The user is prompted to enter employee information for a manager and as many engineers and/or interns as are needed. Employee information is displayed on cards on the webpage, organized by role.
+This CLI application creates a webpage for a software engineering team. The user is prompted to enter employee information for a manager and as many engineers and/or interns as are needed. Employee information is displayed on cards on the webpage, organized by role.
 
 ## Table of Contents
 
