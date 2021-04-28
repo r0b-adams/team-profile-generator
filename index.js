@@ -124,21 +124,6 @@ function getSortedRoles() {
           }
       }
 
-    // for (let i = 0; i < teamArray.length; i++)  {
-
-    //     const currEmployee = teamArray[i]
-
-    //     if (teamArray[i].getRole() === "Manager") {
-    //         sortedArrays.managers.push(currEmployee);
-
-    //     } else if (teamArray[i].getRole() === "Engineer") {
-    //         sortedArrays.engineers.push(currEmployee);
-
-    //     } else { // (teamArray[i].getRole() === "Intern")
-    //         sortedArrays.interns.push(currEmployee);
-    //     } 
-    // }
-
     return sortedArrays;
 }
 
